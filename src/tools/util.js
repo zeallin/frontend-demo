@@ -10,9 +10,10 @@ const Util = {
     },
 
     deepMerge: function (srcObj, dstObj) {
-        var obj = this.deepCopy(srcObj);
-        if (obj == null) return obj;
-        return Object.assign(dstObj, srcObj)
+        var srcObjCopy = this.deepCopy(srcObj);
+        var dstObjCopy = this.deepCopy(dstObj);
+        if (srcObjCopy == null || dstObjCopy == null) return null;
+        return Object.assign(dstObjCopy, srcObjCopy)
     }
 }
 

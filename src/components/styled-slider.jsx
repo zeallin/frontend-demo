@@ -1,92 +1,45 @@
 import React from 'react';
 import { Slider } from '@mui/material';
-import { styled } from "@mui/material/styles";
-
-const style = {
-
-    "& .MuiSlider-track": {
-        height: 8,
-        border: 0,
-        borderRadius: 8,
-        color: '#ffffff',
-        opacity: 1,
-        backgroundImage: 'linear-gradient(to right, #FFD25F, #FF5C01)'
-    },
-
-    "& .MuiSlider-rail": {
-        height: 8,
-        border: 0,
-        borderRadius: 8,
-        backgroundColor: '#ffffff',
-        opacity: 0.3
-    },
-
-    "& .MuiSlider-mark": {
-        backgroundColor: 'transparent'
-    },
-
-    "& .MuiSlider-markLabel": {
-        color: '#ffffff',
-        fontStyle: 'normal',
-        fontWeight: 500,
-        fontSize: 16,
-        lineHeight: '150%',
-        letterSpacing: '0.15px'
-    },
-
-    "& .MuiSlider-root": {
-
-    },
-
-
-    thumb: {
-        background: "red",
-        "&~&": {
-            background: "green"
-        }
-    },
-    mark: {
-        background: "black"
-    },
-    rail: {
-        background: "linear-gradient(to right, red, red 50%, green 50%, green);"
-    },
-    track: {
-        background: "orange"
-    },
-    valueLabel: {
-        "&>*": {
-            background: "black"
-        }
-    }
-};
+import { alpha, styled } from '@mui/material/styles';
 
 const marks = [
     {
-        value: 3,
+        value: 0,
         label: '3',
     },
     {
-        value: 6,
+        value: 18.3,
         label: '6',
     },
     {
-        value: 9,
+        value: 36.6,
         label: '9',
     },
     {
-        value: 12,
+        value: 55.5,
         label: '12',
     },
     {
-        value: 15,
+        value: 73.8,
         label: '15',
     },
     {
-        value: 50,
+        value: 98.4,
         label: '50',
     }
 ];
+
+var idxValMap = {};
+for (var i = 0; i < marks.length; i++) {
+    idxValMap[marks[i].value] = i;
+}
+
+var idxLabelMap = {};
+for (var i = 0; i < marks.length; i++) {
+    idxLabelMap[marks[i].label] = i;
+}
+
+
 
 function valuetext(value) {
     return value;
@@ -96,23 +49,48 @@ function valueLabelFormat(value) {
     return value;
 }
 
-const StyledSliderBase = styled(Slider)(style);
+const StyledSlider = styled(Slider, {
+    shouldForwardProp: (prop) => prop !== 'selectedIdx',
+})(({ selectedIdx, theme }) => ({
 
-const StyledSlider = (props) => {
+    [`& .MuiSlider-markLabel[data-index="${selectedIdx}"]`]: {
+        opacity: 1
+    }
+}));
+
+
+function DynamicCSS(props) {
+    var defaultIdx = 0;
+    var defaultVal = 0;
+    try {
+        defaultIdx = idxLabelMap[props.defaultValue];
+        defaultVal = marks[defaultIdx].value;
+    } catch (ex) {
+        console.error(ex);
+    }
+
+    const [selectedIdx, setSelectedIdx] = React.useState(defaultIdx);
+
+    const handleChange = (event, val) => {
+        const idx = idxValMap[val];
+        // console.log(idx);
+        setSelectedIdx(idx);
+    };
+
     return (
-        <StyledSliderBase aria-label="Always visible"
-            defaultValue={15}
-            min={3}
-            max={50}
+        <StyledSlider aria-label="Always visible"
+            defaultValue={defaultVal}
+            min={0}
+            max={100}
             getAriaValueText={valuetext}
             valueLabelFormat={valueLabelFormat}
             step={null}
             valueLabelDisplay="off"
             marks={marks}
+            onChangeCommitted={handleChange}
+            selectedIdx={selectedIdx}
         />
     );
 }
 
-export {
-    StyledSlider
-}
+export default DynamicCSS;

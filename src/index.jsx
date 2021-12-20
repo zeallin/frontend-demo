@@ -6,7 +6,7 @@ import { CssBaseline } from '@mui/material';
 
 // CSS and Theme
 import './css/index.css';
-import theme from './themes/main.theme';
+import theme from './themes/main/main.theme';
 
 // Views
 import Home from './components/views/home.view';
