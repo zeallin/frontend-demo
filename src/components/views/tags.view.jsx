@@ -1,6 +1,8 @@
 import React from 'react'
 import { Router, Route, Link, hashHistory } from 'react-router-dom';
 import { Box, Button, TextField, Typography, Grid, Tabs, Tab } from '@mui/material';
+import { ThemeProvider, useTheme, createTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
 
@@ -10,6 +12,7 @@ import theme from '../../themes/main/main.theme';
 import StyledSlider from '../styled-slider';
 import Portfile from '../portfile';
 import PageType from '../../types/page.type'
+import TagItem from '../tag.item';
 
 import {
   RwdBox,
@@ -22,14 +25,13 @@ import {
 
 const RwdMainBox = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down('sm')]: {
-    marginLeft: 20,
-    marginRight: 20,
+    marginLeft: 25,
+    marginRight: 26,
   },
   [theme.breakpoints.up('md')]: {
     marginLeft: 210,
     marginRight: 0,
     marginTop: 54,
-    width: 725
   }
 }));
 
@@ -87,17 +89,25 @@ const RwdMainBox = styled(Box)(({ theme }) => ({
 // }));
 
 
+function useIsWidthUp(breakpoint) {
+  const theme = useTheme();
+  return useMediaQuery(theme.breakpoints.up(breakpoint));
+}
+function useIsWidthDown(breakpoint) {
+  const theme = useTheme();
+  return useMediaQuery(theme.breakpoints.down(breakpoint));
+}
+
 function HomeView() {
 
-  // let keyWord = '';
+  let keyWord = '';
 
-  const [pageIdx, setPageIfdx] = React.useState(1);
+  const isSmallScreen = !useIsWidthUp("md");
+
   const [numResult, setNumResult] = React.useState(30);
-  const [keyword, setKeyword] = React.useState('');
 
   const onTextFieldChanged = (event) => {
-    // keyWord = event.target.value;
-    setKeyword(event.target.value);
+    keyWord = event.target.value;
   };
 
   const onSliderChanged = (newVal) => {
@@ -106,36 +116,51 @@ function HomeView() {
   };
 
   return (
-    <MainLayout pageType={PageType.HOME}>
+    <MainLayout pageType={PageType.TAGS}>
+
+      <RwdMobileOnlyBox isSmallScreen={isSmallScreen}>
+        <Grid container spacing={0} direction="column" alignItems="left"
+          justifyContent="center" sx={{ height: 70, top: 0, position: 'sticky', backgroundColor: param.BG_COLOR }}>
+          <Grid item xs>
+            <Box sx={{ ml: 19 }} >
+              <Stack direction="row" spacing={13} alignItems="center">
+                <Link to="/">
+                  <Box component="img" sx={{ height: 21.67, width: 12.77 }} src="back.svg" />
+                </Link>
+                <Typography variant="h5">Home Page</Typography>
+              </Stack>
+            </Box>
+          </Grid>
+        </Grid>
+      </RwdMobileOnlyBox>
+
       <RwdMainBox >
-        <Typography sx={{ mb: 16 }} variant="h5" >Search</Typography>
-        <RwdBox>
-          <TextField variant="outlined" placeholder="Keyword" fullWidth onChange={onTextFieldChanged} />
-        </RwdBox>
-        <RwdDesktopOnlyBox >
-          <Box sx={{ height: '1px', backgroundColor: '#FFFFFF', opacity: 0.1, mt: 30, mb: 30 }}></Box>
-        </RwdDesktopOnlyBox>
-        <Typography sx={{ mt: 28, mb: 16 }} variant="h5" ># of results per page</Typography>
+        <Typography sx={{ mb: 16, ml: isSmallScreen ? -6 : 0 }} variant={isSmallScreen ? "h5" : "h4"} >Tags</Typography>
 
-        <Stack direction="row" spacing={13} alignItems="flex-end">
-          <Typography variant="h3_bold">{numResult}</Typography>
-          <Typography variant="subtitle">result</Typography>
+        <Grid container spacing={24} sx={{ width: isSmallScreen ? 'auto' : 846 }}>
+          <Grid item xs={isSmallScreen ? 6 : 2.4}>
+            <TagItem />
+          </Grid>
+          <Grid item xs={isSmallScreen ? 6 : 2.4}>
+            <TagItem />
+          </Grid>
+          <Grid item xs={isSmallScreen ? 6 : 2.4}>
+            <TagItem />
+          </Grid>
+          <Grid item xs={isSmallScreen ? 6 : 2.4}>
+            <TagItem />
+          </Grid>
+          <Grid item xs={isSmallScreen ? 6 : 2.4}>
+            <TagItem />
+          </Grid>
+          <Grid item xs={isSmallScreen ? 6 : 2.4}>
+            <TagItem />
+          </Grid>
 
-        </Stack>
-        <RwdBox >
-          <StyledSlider defaultValue={15} onChangeCommitted={onSliderChanged} />
-        </RwdBox>
+        </Grid>
+
       </RwdMainBox>
-
-      <RwdMainBox sx={{ bottom: 87, position: 'fixed', width: '100%', pr: 40 }}>
-        <Box sx={{ height: '1px', backgroundColor: '#FFFFFF', opacity: 0.1, mb: 80 }}></Box>
-        <RwdBox sx={{ width: 343 }}>
-          <Link to={'search?page=' + pageIdx + '&pageSize=' + numResult + '&keyword=' + keyword}>
-            <Button variant="general" fullWidth >Search</Button>
-          </Link>
-        </RwdBox>
-      </RwdMainBox>
-    </MainLayout>
+    </MainLayout >
   );
 }
 

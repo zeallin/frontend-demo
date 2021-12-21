@@ -1,6 +1,6 @@
 import React from 'react';
 import { Slider } from '@mui/material';
-import { alpha, styled } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 
 const marks = [
     {
@@ -75,6 +75,9 @@ function DynamicCSS(props) {
         const idx = idxValMap[val];
         // console.log(idx);
         setSelectedIdx(idx);
+        if (props.onChangeCommitted) {
+            props.onChangeCommitted(parseInt(marks[idx].label));
+        }
     };
 
     return (

@@ -9,10 +9,14 @@ import './css/index.css';
 import theme from './themes/main/main.theme';
 
 // Views
-import Home from './components/views/home.view';
+import HomeView from './components/views/home.view';
+import TagsView from './components/views/tags.view';
+import SearchView from './components/views/search.view';
 import Components from './components/views/component.view';
 
 // Misc
+import PageType from './types/page.type';
+import PageRouteType from './types/page.route.type';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
@@ -21,9 +25,10 @@ ReactDOM.render(
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Routes>
-          {/* <Route path="/" element={<Home />} /> */}
-          <Route path="/" element={<Components />} />
-          <Route path="/components" element={<Components />} />
+          <Route path={PageRouteType[PageType.HOME]} element={<HomeView />} />
+          <Route path={PageRouteType[PageType.TAGS]} element={<TagsView />} />
+          <Route path={PageRouteType[PageType.SEARCH]} element={<SearchView />} />
+          <Route path={PageRouteType[PageType.COMPONENTS]} element={<Components />} />
         </Routes>
       </ThemeProvider>
     </BrowserRouter>

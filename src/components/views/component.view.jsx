@@ -39,7 +39,7 @@ function ComponentView() {
   return (
     <Box sx={{ pt: MARGIN_TOP_BODY, pl: MARGIN_LEFT_BODY }}>
       <Box sx={{ mt: 1, mb: MARGIN_BOTTOM_H4 }}><Typography variant="h4_bold" >Component</Typography></Box>
-      <Box sx={{ mb: MARGIN_BOTTOM_H5 - 1 }}><Typography variant="h5" >Button</Typography></Box>
+      <Box sx={{ mb: MARGIN_BOTTOM_H5 - 1 }}><Typography variant="h5_medium" >Button</Typography></Box>
       <Stack direction="row" spacing={41}>
         <Stack spacing={13}>
           <Typography variant="button">Normal</Typography>
@@ -86,7 +86,7 @@ function ComponentView() {
       </Stack>
 
 
-      <Box sx={{ mt: 109, mb: MARGIN_BOTTOM_H5 - 7 }}><Typography variant="h5" >Input</Typography></Box>
+      <Box sx={{ mt: 109, mb: MARGIN_BOTTOM_H5 - 7 }}><Typography variant="h5_medium" >Input</Typography></Box>
       <Box sx={{ ml: -1 }}>
         <Box sx={{ mb: 4 }}><Typography variant="button">Normal</Typography></Box>
         <TextField variant="outlined" placeholder="Keyword" sx={{ width: TEXT_FIELD_WIDTH, minHeight: 60, maxHeight: 60 }} />
@@ -94,7 +94,7 @@ function ComponentView() {
         <TextField variant="outlined" sx={{ width: TEXT_FIELD_WIDTH, input: { borderColor: '#FF9B33' } }} value="Key " />
       </Box>
 
-      <Box sx={{ mt: 138, mb: MARGIN_BOTTOM_H5 - 6 }}><Typography variant="h5" >Slider</Typography></Box>
+      <Box sx={{ mt: 138, mb: MARGIN_BOTTOM_H5 - 6 }}><Typography variant="h5_medium" >Slider</Typography></Box>
       <Box sx={{ width: 733, ml: 1 }} >
         <StyledSlider defaultValue={15} />
       </Box>
