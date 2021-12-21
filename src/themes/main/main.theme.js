@@ -8,6 +8,7 @@ import baseline from './main.theme.baseline';
 import button from './main.theme.button';
 import textfield from './main.theme.textfield';
 import slider from './main.theme.slider';
+import tab from './main.theme.tab';
 
 const MainTheme = createTheme({
     spacing: 1,
@@ -30,7 +31,8 @@ const MainTheme = createTheme({
         MuiCssBaseline: baseline,
         MuiTextField: textfield,
         MuiSlider: slider,
-        MuiButton: button
+        MuiButton: button,
+        MuiTab: tab
     }
 });
 

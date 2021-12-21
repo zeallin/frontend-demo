@@ -6,6 +6,18 @@ const MainThemeBaseline = {
             backgroundColor: param.BG_COLOR,
             color: param.PRIMARY_COLOR,
         },
+        a: {
+            textDecoration: 'none',
+            '&:link': {
+                color: param.PRIMARY_COLOR
+            },
+            '&:hover': {
+                color: param.PRIMARY_COLOR
+            },
+            '&:visited': {
+                color: param.PRIMARY_COLOR
+            }
+        }
     },
 }
 

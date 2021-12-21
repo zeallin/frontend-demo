@@ -1,8 +1,10 @@
 import param from './main.theme.param';
 import {
-    MainThemeFont_Body1
+    MainThemeFont_Body1_Medium,
+    MainThemeFont_Body2
 } from './main.theme.font.style';
 import Util from '../../tools/util';
+
 
 const MainThemeSlider = {
     styleOverrides: {
@@ -50,6 +52,7 @@ const MainThemeSlider = {
             paddingLeft: '7px',
             marginLeft: '0px',
             // marginLeft: '-9.5px',
+            '@media (max-width: 600px)': MainThemeFont_Body2
 
         },
 
@@ -58,7 +61,7 @@ const MainThemeSlider = {
 
 // Apply font style
 MainThemeSlider.styleOverrides.markLabel = Util.deepMerge(
-    MainThemeFont_Body1,
+    MainThemeFont_Body1_Medium,
     MainThemeSlider.styleOverrides.markLabel);
 
 export default MainThemeSlider;

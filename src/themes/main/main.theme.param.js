@@ -1,6 +1,8 @@
 const MainThemeParam = {
     BG_COLOR: '#181818',
-    PRIMARY_COLOR: '#ffffff',
+    MENU_BG_COLOR: '#1B1B1B',
+    PRIMARY_COLOR: '#FFFFFF',
+    PRIMARY_LIGHT_COLOR: '#00D1FF',
     NO_COLOR: 'transparent',
     TEXT_COLOR_DARK: '#121212',
     DEFAULT_FONT: "'Ubuntu', sans-serif",
