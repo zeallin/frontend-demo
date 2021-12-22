@@ -52,7 +52,7 @@ function MainLayout(props) {
         <Grid container spacing={0} direction="column" alignItems="left"
           justifyContent="center" sx={{ height: 70, top: 0, position: 'sticky', backgroundColor: param.BG_COLOR }}>
           <Grid item xs={3}>
-            <Box sx={{ ml: 21 }} >
+            <Box sx={{ ml: 21, mt: -2 }} >
               <Link to="/">
                 <Typography variant="logo">LOGO</Typography>
               </Link>

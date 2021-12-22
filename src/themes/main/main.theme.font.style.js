@@ -99,7 +99,7 @@ const MainThemeFont_Logo = {
 
 
 const MainThemeFont_TagTitle = {
-    fontFamily: param.SMALL_BUTTON_FONT,
+    fontFamily: param.DEFAULT_FONT,
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: '14.9px',
@@ -109,7 +109,7 @@ const MainThemeFont_TagTitle = {
 }
 
 const MainThemeFont_TagCount = {
-    fontFamily: param.SMALL_BUTTON_FONT,
+    fontFamily: param.DEFAULT_FONT,
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: '11.175px',

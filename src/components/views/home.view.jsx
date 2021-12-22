@@ -16,8 +16,9 @@ import {
   RwdMobileOnlyBox,
   RwdDesktopOnlyBox,
   RwdXlOnlyBox
-} from '../rwd-box'
+} from '../rwd-box';
 
+import ThemeHelper from '../../tools/theme.helper';
 
 
 const RwdMainBox = styled(Box)(({ theme }) => ({
@@ -33,63 +34,12 @@ const RwdMainBox = styled(Box)(({ theme }) => ({
   }
 }));
 
-// const RwdMobileOnlyBox = styled(Box)(({ theme }) => ({
-//   [theme.breakpoints.down('sm')]: {
-//     display: 'block'
-//   },
-//   [theme.breakpoints.up('md')]: {
-//     display: 'none'
-//   }
-// }));
-
-
-// const RwdDesktopOnlyBox = styled(Box)(({ theme }) => ({
-//   [theme.breakpoints.down('sm')]: {
-//     display: 'none'
-
-//   },
-//   [theme.breakpoints.up('md')]: {
-//     display: 'block'
-//   }
-// }));
-
-// const RwdXlOnlyBox = styled(Box)(({ theme }) => ({
-//   [theme.breakpoints.down('lg')]: {
-//     display: 'none'
-
-//   },
-//   [theme.breakpoints.up('xl')]: {
-//     display: 'block'
-//   }
-// }));
-
-
-// const RwdBox = styled(Box, {
-//   shouldForwardProp: (prop) => prop !== 'sx',
-// })(({ sx, theme }) => ({
-
-//   [theme.breakpoints.down('sm')]: {
-//     width: '100%'
-//   },
-//   [theme.breakpoints.up('md')]: {
-//     width: sx ? sx.width : 725
-//   }
-// }));
-
-// const NotifyDotBox = styled(Box)(({ theme }) => ({
-//   height: 7,
-//   width: 7,
-//   backgroundColor: param.PRIMARY_LIGHT_COLOR,
-//   boxSizing: 'border-box',
-//   border: '1px solid',
-//   borderColor: param.MENU_BG_COLOR,
-//   borderRadius: '50%'
-// }));
-
 
 function HomeView() {
 
   // let keyWord = '';
+
+  const isSmallScreen = !ThemeHelper.useIsWidthUp("md");
 
   const [pageIdx, setPageIfdx] = React.useState(1);
   const [numResult, setNumResult] = React.useState(30);
@@ -108,26 +58,27 @@ function HomeView() {
   return (
     <MainLayout pageType={PageType.HOME}>
       <RwdMainBox >
-        <Typography sx={{ mb: 16 }} variant="h5" >Search</Typography>
-        <RwdBox>
+        <Typography sx={{ mb: 16, mt: isSmallScreen ? 1 : 0 }} variant="h5" >Search</Typography>
+        <RwdBox sx={{ mt: isSmallScreen ? -1 : 0 }}>
           <TextField variant="outlined" placeholder="Keyword" fullWidth onChange={onTextFieldChanged} />
         </RwdBox>
         <RwdDesktopOnlyBox >
           <Box sx={{ height: '1px', backgroundColor: '#FFFFFF', opacity: 0.1, mt: 30, mb: 30 }}></Box>
         </RwdDesktopOnlyBox>
-        <Typography sx={{ mt: 28, mb: 16 }} variant="h5" ># of results per page</Typography>
+        <Typography sx={{ mt: isSmallScreen ? 29 : 28, mb: 4 }} variant="h5" ># of results per page</Typography>
 
-        <Stack direction="row" spacing={13} alignItems="flex-end">
+        <Stack direction="row" spacing={10.5} >
           <Typography variant="h3_bold">{numResult}</Typography>
-          <Typography variant="subtitle">result</Typography>
-
+          <Box sx={{ pt: 33 }}>
+            <Typography variant="subtitle" >result</Typography>
+          </Box>
         </Stack>
-        <RwdBox >
+        <RwdBox sx={{ mt: -3, ml: -4 }}>
           <StyledSlider defaultValue={15} onChangeCommitted={onSliderChanged} />
         </RwdBox>
       </RwdMainBox>
 
-      <RwdMainBox sx={{ bottom: 87, position: 'fixed', width: '100%', pr: 40 }}>
+      <RwdMainBox sx={{ bottom: 90, position: 'fixed', width: '100%', pr: 40 }}>
         <Box sx={{ height: '1px', backgroundColor: '#FFFFFF', opacity: 0.1, mb: 80 }}></Box>
         <RwdBox sx={{ width: 343 }}>
           <Link to={'search?page=' + pageIdx + '&pageSize=' + numResult + '&keyword=' + keyword}>
@@ -135,7 +86,7 @@ function HomeView() {
           </Link>
         </RwdBox>
       </RwdMainBox>
-    </MainLayout>
+    </MainLayout >
   );
 }
 
