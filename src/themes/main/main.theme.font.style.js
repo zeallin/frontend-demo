@@ -51,7 +51,7 @@ const MainThemeFont_Body1 = {
 
 const MainThemeFont_Body1_Medium = Util.deepMerge({
     fontWeight: 500,
-}, MainThemeFont_H5);
+}, MainThemeFont_Body1);
 
 const MainThemeFont_Body2 = {
     fontStyle: 'normal',
@@ -133,6 +133,15 @@ const MainThemeFont_Subtitle_Bold = Util.deepMerge({
     color: '#FFFFFF'
 }, MainThemeFont_Subtitle);
 
+const MainThemeFont_Caption = {
+    fontFamily: param.DEFAULT_FONT,
+    fontStyle: 'normal',
+    fontWeight: 'normal',
+    fontSize: '12px',
+    lineHeight: '150%',
+    letterSpacing: '0.4px'
+}
+
 
 export {
     MainThemeFont_H3,
@@ -152,5 +161,6 @@ export {
     MainThemeFont_TagTitle,
     MainThemeFont_TagCount,
     MainThemeFont_Subtitle,
-    MainThemeFont_Subtitle_Bold
+    MainThemeFont_Subtitle_Bold,
+    MainThemeFont_Caption
 }

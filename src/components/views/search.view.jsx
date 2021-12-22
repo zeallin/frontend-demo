@@ -1,20 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Router, Route, Link, hashHistory } from 'react-router-dom';
-import { Box, Button, TextField, Typography, Grid, Tabs, Tab } from '@mui/material';
-import { ThemeProvider, useTheme, createTheme } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import Stack from '@mui/material/Stack';
+import { Link, useLocation } from 'react-router-dom';
+import { Box, Button, Typography, Grid, Stack } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 import MainLayout from './main.layout'
-import param from '../../themes/main/main.theme.param';
-import theme from '../../themes/main/main.theme';
-import StyledSlider from '../styled-slider';
-import Portfile from '../portfile';
 import PageType from '../../types/page.type'
 import MobileNav from '../mobile.nav';
 import SearchResultItem from '../search.result.item';
-
 import SearchSample from '../../data/search.sample.json';
 
 import {
@@ -24,8 +16,8 @@ import {
   RwdXlOnlyBox
 } from '../rwd-box'
 
-
 import ThemeHelper from '../../tools/theme.helper';
+import Util from '../../tools/util';
 
 const RwdMainBox = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down('sm')]: {
@@ -36,49 +28,72 @@ const RwdMainBox = styled(Box)(({ theme }) => ({
   [theme.breakpoints.up('md')]: {
     marginLeft: 210,
     marginRight: 0,
-    marginTop: 54,
+    marginTop: 96,
   }
 }));
 
-// function useIsWidthUp(breakpoint) {
-//   const theme = useTheme();
-//   return useMediaQuery(theme.breakpoints.up(breakpoint));
-// }
-// function useIsWidthDown(breakpoint) {
-//   const theme = useTheme();
-//   return useMediaQuery(theme.breakpoints.down(breakpoint));
-// }
+
+function useQuery() {
+  const { search } = useLocation();
+  return React.useMemo(() => new URLSearchParams(search), [search]);
+}
 
 function SearchView(props) {
-  const pageIdx = 1;
-  const numResult = 30;
-  const keyword = '';
+  let query = useQuery();
 
   const isSmallScreen = !ThemeHelper.useIsWidthUp("md");
 
   const [result, setResult] = useState([]);
 
+  let pageIdx = Util.ensureParam(query.get('page'), '1');
+  let numResult = Util.ensureParam(query.get('pageSize'), 30);
+  let keyword = Util.ensureParam(query.get('keyword'), '');
+
+  const getData = () => {
+
+
+    fetch(process.env.REACT_APP_API_SEARCH_URL + `?page=${pageIdx}&pageSize=${numResult}&keyword=${keyword}`)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (resData) {
+        setResult(resData.data);
+      });
+  };
 
   useEffect(() => {
 
     if (props.isMock) {
-      setResult(SearchSample.data);
+      setResult(SearchSample.data.slice(0, 9));
     } else {
       // Load API
+      getData();
     }
   }, []);
 
   return (
-    <MainLayout pageType={PageType.SEARCH}>
+    <MainLayout pageType={PageType.SEARCH} isMock={props.isMock}>
 
       <RwdMobileOnlyBox >
         <MobileNav />
       </RwdMobileOnlyBox>
 
       <RwdMainBox >
-        <Typography sx={{ mb: isSmallScreen ? 24 : 16, ml: isSmallScreen ? 0 : 0 }} variant={isSmallScreen ? "h5" : "h4"} >Results</Typography>
 
-        <Grid container justifyContent="flex-start" alignItems="flex-start" spacing={isSmallScreen ? 40 : 34} sx={{ width: isSmallScreen ? 'auto' : 780, }}>
+        <RwdDesktopOnlyBox sx={{ ml: -44, mb: 23 }}>
+          <Link to="/">
+            <Stack direction="row" spacing={25} >
+              <Box component="img" sx={{ height: 26, width: 26, mt: 6 }} src="back.svg" />
+              <Typography sx={{ mt: '-3px !important' }} variant="h4" >Results</Typography>
+            </Stack>
+          </Link>
+        </RwdDesktopOnlyBox>
+
+        <RwdMobileOnlyBox>
+          <Typography sx={{ mb: 24, ml: 0 }} variant="h5" >Results</Typography>
+        </RwdMobileOnlyBox>
+
+        <Grid container justifyContent="flex-start" alignItems="flex-start" spacing={isSmallScreen ? 40 : 30} sx={{ width: isSmallScreen ? 'auto' : 759 }}>
 
           {result.map((value, index) => {
             return (
@@ -90,9 +105,9 @@ function SearchView(props) {
 
         </Grid>
         <RwdDesktopOnlyBox sx={{ mt: 39 }}>
-          <Link to={'search?page=' + (pageIdx + 1) + '&pageSize=' + numResult + '&keyword=' + keyword}>
-            <Button variant="general" sx={{ width: 343 }} >Search</Button>
-          </Link>
+          <a href={'/search?page=' + (parseInt(pageIdx) + 1) + '&pageSize=' + numResult + '&keyword=' + keyword}>
+            <Button variant="general" sx={{ width: 343 }} >More</Button>
+          </a>
         </RwdDesktopOnlyBox>
       </RwdMainBox>
     </MainLayout >

@@ -5,27 +5,27 @@
     "pageSize": 100,
     "data": [{
         "id": "b943c2ee-4c18-45f7-aca0-17240d1c4bc5",
-        "name": "Carey Gerlach",
+        "name": "Fullname",
         "username": "username",
-        "avater": "https://cdn.fakercloud.com/avatars/leehambley_128.jpg",
+        "avater": "https://cdn.fakercloud.com/avatars/tonymillion_128.jpg",
         "isFollowing": true
     }, {
         "id": "3c132e92-314f-440b-a458-fd418d989b52",
-        "name": "Philip Veum",
-        "username": "Lavonne.Hamill49",
-        "avater": "https://cdn.fakercloud.com/avatars/gabrielizalo_128.jpg",
+        "name": "Fullname",
+        "username": "username",
+        "avater": "https://cdn.fakercloud.com/avatars/tonymillion_128.jpg",
         "isFollowing": true
     }, {
         "id": "f1dffb73-4073-4adc-a1a8-6dfe20c24ddb",
-        "name": "Amely Carroll",
-        "username": "Wava_Greenholt24",
-        "avater": "https://cdn.fakercloud.com/avatars/teylorfeliz_128.jpg",
+        "name": "Fullname",
+        "username": "username",
+        "avater": "https://cdn.fakercloud.com/avatars/tonymillion_128.jpg",
         "isFollowing": true
     }, {
         "id": "abd92b53-b6f0-44f3-a5cb-e9253860b248",
-        "name": "Mireya Frami",
-        "username": "Jarret_Borer",
-        "avater": "https://cdn.fakercloud.com/avatars/IsaryAmairani_128.jpg",
+        "name": "Fullname",
+        "username": "username",
+        "avater": "https://cdn.fakercloud.com/avatars/tonymillion_128.jpg",
         "isFollowing": true
     }, {
         "id": "dd09224a-996c-4917-90a2-a37bf2148a82",

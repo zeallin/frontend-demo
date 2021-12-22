@@ -19,7 +19,7 @@ import PageType from './types/page.type';
 import PageRouteType from './types/page.route.type';
 import reportWebVitals from './reportWebVitals';
 
-const isMock = true;
+const isMock = false;
 
 ReactDOM.render(
   <React.StrictMode>
@@ -27,7 +27,7 @@ ReactDOM.render(
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Routes>
-          <Route path={PageRouteType[PageType.HOME]} element={<HomeView />} />
+          <Route path={PageRouteType[PageType.HOME]} element={<HomeView isMock={isMock} />} />
           <Route path={PageRouteType[PageType.TAGS]} element={<TagsView isMock={isMock} />} />
           <Route path={PageRouteType[PageType.SEARCH]} element={<SearchView isMock={isMock} />} />
           <Route path={PageRouteType[PageType.COMPONENTS]} element={<Components />} />

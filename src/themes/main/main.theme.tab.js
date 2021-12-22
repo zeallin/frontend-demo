@@ -8,7 +8,7 @@ import Util from '../../tools/util';
 const MainThemeTab = {
     styleOverrides: {
         root: {
-
+            paddingBottom: '6px',
             "&.Mui-selected": MainThemeFont_Subtitle_Bold
         }
     }

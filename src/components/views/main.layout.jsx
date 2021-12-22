@@ -1,12 +1,10 @@
 import React from 'react'
-import { Router, Route, Link, hashHistory } from 'react-router-dom';
-import { Box, Button, TextField, Typography, Grid, Tabs, Tab } from '@mui/material';
+import { Link } from 'react-router-dom';
+import { Box, Typography, Grid, } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
 
 import param from '../../themes/main/main.theme.param';
-import theme from '../../themes/main/main.theme';
-import StyledSlider from '../styled-slider';
 import Portfile from '../portfile';
 
 import {
@@ -15,21 +13,8 @@ import {
   RwdDesktopOnlyBox,
   RwdXlOnlyBox
 } from '../rwd-box'
+
 import PageType from '../../types/page.type';
-
-
-
-// const RwdMainBox = styled(Box)(({ theme }) => ({
-//   [theme.breakpoints.down('sm')]: {
-//     marginLeft: 20,
-//     marginRight: 20,
-//   },
-//   [theme.breakpoints.up('md')]: {
-//     marginLeft: 210,
-//     marginRight: 0,
-//     marginTop: 54,
-//   }
-// }));
 
 const NotifyDotBox = styled(Box)(({ theme }) => ({
   height: 7,
@@ -43,7 +28,6 @@ const NotifyDotBox = styled(Box)(({ theme }) => ({
 
 
 function MainLayout(props) {
-
 
   const uiGetMobileTopBar = (pageType) => {
     if (pageType != PageType.HOME) return null;
@@ -70,7 +54,7 @@ function MainLayout(props) {
         <Grid container spacing={0} direction="column" alignItems="center"
           justifyContent="center" sx={{ height: 66, bottom: 0, position: 'fixed', backgroundColor: param.MENU_BG_COLOR }}>
           <Grid item xs={3}>
-            <Stack direction="row" spacing={50}>
+            <Stack direction="row" spacing={50} sx={{ pt: 3 }}>
               <Link to="/" >
                 <Box component="img" sx={{ height: 24, width: 24 }} src="menu-item-sel.svg" />
               </Link>
@@ -84,11 +68,11 @@ function MainLayout(props) {
     );
   }
 
-  const uiGetPortfile = (pageType) => {
+  const uiGetPortfile = (pageType, isMock) => {
     if (pageType == PageType.TAGS) return null;
     return (
       <RwdXlOnlyBox sx={{ width: 375, position: 'fixed', top: '0px', right: '0px', height: '100%' }}>
-        <Portfile />
+        <Portfile isMock={isMock} />
       </RwdXlOnlyBox>
     );
   }
@@ -102,31 +86,33 @@ function MainLayout(props) {
       <RwdDesktopOnlyBox sx={{ width: 80, top: '0px', height: '100%', position: 'fixed', backgroundColor: param.MENU_BG_COLOR }}>
 
         <Grid container spacing={0} direction="column" alignItems="center"
-          justifyContent="center" sx={{ height: 88 }}>
+          justifyContent="center" sx={{ height: 88, mt: -1 }}>
           <Grid item xs={3}>
             <Box sx={{ ml: 0 }} >
-              <Typography variant="logo">LOGO</Typography>
+              <Link to="/" >
+                <Typography variant="logo">LOGO</Typography>
+              </Link>
             </Box>
           </Grid>
         </Grid>
 
-        <Stack alignItems="center" spacing={50}>
+        <Stack alignItems="center" spacing={22} sx={{ mt: 8, ml: 1 }}>
           <Box>
             <Link to="/" >
-              <Stack direction="column" alignItems="center">
+              <Stack direction="column" alignItems="center" >
                 <Box component="img" sx={{ height: 24, width: 24 }} src={isTagPage ? 'menu-item.svg' : 'menu-item-sel.svg'} />
-                <Typography variant="caption" sx={{ visibility: isTagPage ? 'hidden' : 'visible' }}>Home</Typography>
+                <Typography variant="caption" sx={{ paddingLeft: '1px', visibility: isTagPage ? 'hidden' : 'visible' }}>Home</Typography>
               </Stack>
             </Link>
           </Box>
           <Box>
             <Link to="/tags" >
               <Stack direction="column" alignItems="center">
-                <Box>
-                  <NotifyDotBox sx={{ position: 'absolute', ml: 24, mt: -1, display: isTagPage ? 'none' : 'block' }}></NotifyDotBox>
+                <Box sx={{ height: 24 }}>
+                  <NotifyDotBox sx={{ position: 'absolute', ml: 21, mt: -4, display: isTagPage ? 'none' : 'block' }}></NotifyDotBox>
                   <Box component="img" sx={{ height: 24, width: 24 }} src={isTagPage ? 'menu-item-sel.svg' : 'menu-item.svg'} />
                 </Box>
-                <Typography variant="caption" sx={{ visibility: isTagPage ? 'visible' : 'hidden' }}>Tags</Typography>
+                <Typography variant="caption" sx={{ mt: 1, paddingLeft: '1px', visibility: isTagPage ? 'visible' : 'hidden' }}>Tags</Typography>
               </Stack>
             </Link>
           </Box>
@@ -134,40 +120,10 @@ function MainLayout(props) {
 
       </RwdDesktopOnlyBox>
 
-
-      {/* <RwdMainBox >
-        <Typography sx={{ mb: 16 }} variant="h5" >Search</Typography>
-        <RwdBox>
-          <TextField variant="outlined" placeholder="Keyword" fullWidth onChange={onTextFieldChanged} />
-        </RwdBox>
-        <Typography sx={{ mt: 28, mb: 16 }} variant="h5" ># of results per page</Typography>
-
-        <Stack direction="row" spacing={13} alignItems="flex-end">
-          <Typography variant="h3_bold">{numResult}</Typography>
-          <Typography variant="subtitle">result</Typography>
-
-        </Stack>
-        <RwdBox >
-          <StyledSlider defaultValue={15} onChangeCommitted={onSliderChanged} />
-        </RwdBox>
-      </RwdMainBox>
-
-      <RwdMainBox sx={{ bottom: 87, position: 'fixed', width: '100%', pr: 40 }}>
-        <Box sx={{ height: '1px', backgroundColor: '#FFFFFF', opacity: 0.1, mb: 80 }}></Box>
-        <RwdBox sx={{ width: 343 }}>
-          <Button variant="general" fullWidth >Search</Button>
-        </RwdBox>
-      </RwdMainBox> */}
-
       {props.children}
 
       {uiGetMobileBottomMenu(props.pageType)}
-      {uiGetPortfile(props.pageType)}
-
-
-
-
-
+      {uiGetPortfile(props.pageType, props.isMock)}
 
     </React.Fragment>
   );

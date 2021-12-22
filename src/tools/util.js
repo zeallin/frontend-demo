@@ -14,6 +14,11 @@ const Util = {
         var dstObjCopy = this.deepCopy(dstObj);
         if (srcObjCopy == null || dstObjCopy == null) return null;
         return Object.assign(dstObjCopy, srcObjCopy)
+    },
+
+    ensureParam: function (param, defaultVal) {
+        if (param == null) return defaultVal;
+        return param;
     }
 }
 

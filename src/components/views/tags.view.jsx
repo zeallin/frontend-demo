@@ -1,16 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Router, Route, Link, hashHistory } from 'react-router-dom';
-import { Box, Button, TextField, Typography, Grid, Tabs, Tab } from '@mui/material';
-import { ThemeProvider, useTheme, createTheme } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import Stack from '@mui/material/Stack';
+import { Box, Typography, Grid } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 import MainLayout from './main.layout'
-import param from '../../themes/main/main.theme.param';
-import theme from '../../themes/main/main.theme';
-import StyledSlider from '../styled-slider';
-import Portfile from '../portfile';
 import PageType from '../../types/page.type';
 import MobileNav from '../mobile.nav';
 import TagItem from '../tag.item';
@@ -33,20 +25,28 @@ const RwdMainBox = styled(Box)(({ theme }) => ({
     marginTop: 91,
   },
   [theme.breakpoints.up('md')]: {
-    marginLeft: 210,
+    marginLeft: 337,
     marginRight: 0,
-    marginTop: 54,
+    marginTop: 81,
   }
 }));
 
 
 function TagsView(props) {
 
-  let keyWord = '';
-
   const isSmallScreen = !ThemeHelper.useIsWidthUp("md");
 
   const [result, setResult] = useState([]);
+
+  const getData = () => {
+    fetch(process.env.REACT_APP_API_TAG_URL)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (resData) {
+        setResult(resData);
+      });
+  };
 
   useEffect(() => {
 
@@ -54,11 +54,12 @@ function TagsView(props) {
       setResult(TagsSample);
     } else {
       // Load API
+      getData();
     }
   }, []);
 
   return (
-    <MainLayout pageType={PageType.TAGS}>
+    <MainLayout pageType={PageType.TAGS} isMock={props.isMock}>
 
       <RwdMobileOnlyBox >
         <MobileNav />
@@ -66,10 +67,9 @@ function TagsView(props) {
 
       <RwdMainBox >
 
-        <Typography sx={{ mb: isSmallScreen ? 23 : 16, ml: isSmallScreen ? -5 : 0 }} variant={isSmallScreen ? "h5" : "h4"} >Tags</Typography>
+        <Typography sx={{ mb: isSmallScreen ? 23 : 23, ml: isSmallScreen ? -5 : 0 }} variant={isSmallScreen ? "h5" : "h4"} >Tags</Typography>
 
-        <Grid container spacing={24} sx={{ width: isSmallScreen ? 'auto' : 846 }}>
-
+        <Grid container spacing={24} sx={{ width: isSmallScreen ? 'auto' : 870 }}>
           {result.map((value, index) => {
             return (
               <Grid item xs={isSmallScreen ? 6 : 2.4}>
@@ -77,8 +77,6 @@ function TagsView(props) {
               </Grid>
             );
           })}
-
-
         </Grid>
 
       </RwdMainBox>

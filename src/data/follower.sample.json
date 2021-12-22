@@ -5,27 +5,24 @@
     "pageSize": 100,
     "data": [{
         "id": "e10bf329-e3cb-4336-8e86-b11c57932224",
-        "name": "Maribel Kilback",
-        "username": "Loyal52",
+        "name": "Fullname",
+        "username": "username",
         "avater": "https://cdn.fakercloud.com/avatars/tonymillion_128.jpg",
         "isFollowing": false
     }, {
-        "id": "ba886872-2f81-4b46-be63-38387b2c9ba6",
-        "name": "Tevin Treutel",
-        "username": "Zachary_Cruickshank69",
-        "avater": "https://cdn.fakercloud.com/avatars/bighanddesign_128.jpg",
+        "name": "Fullname",
+        "username": "username",
+        "avater": "https://cdn.fakercloud.com/avatars/tonymillion_128.jpg",
         "isFollowing": false
     }, {
-        "id": "b943c2ee-4c18-45f7-aca0-17240d1c4bc5",
-        "name": "Carey Gerlach",
-        "username": "Clementine_Effertz",
-        "avater": "https://cdn.fakercloud.com/avatars/leehambley_128.jpg",
+        "name": "Fullname",
+        "username": "username",
+        "avater": "https://cdn.fakercloud.com/avatars/tonymillion_128.jpg",
         "isFollowing": true
     }, {
-        "id": "5a802e03-c798-45c5-a4c1-6ba18d68be6a",
-        "name": "Theresa Schinner",
-        "username": "Jaunita_Tillman98",
-        "avater": "https://cdn.fakercloud.com/avatars/cemshid_128.jpg",
+        "name": "Fullname",
+        "username": "username",
+        "avater": "https://cdn.fakercloud.com/avatars/tonymillion_128.jpg",
         "isFollowing": false
     }, {
         "id": "3c132e92-314f-440b-a458-fd418d989b52",

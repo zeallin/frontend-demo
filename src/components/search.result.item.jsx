@@ -1,6 +1,5 @@
 import React from 'react'
-import { Router, Route, Link, hashHistory } from 'react-router-dom';
-import { Box, Button, TextField, Typography, Grid, Tabs, Tab, Stack } from '@mui/material';
+import { Box, Typography, Stack } from '@mui/material';
 
 function SearchResultItem(props) {
 
@@ -9,7 +8,7 @@ function SearchResultItem(props) {
       <Box component="img" sx={{ height: props.isSmallScreen ? '222.67px' : 146, width: '100%', backgroundColor: 'rgba(255, 255, 255, 0.06)' }} src={props.data.avater}>
 
       </Box>
-      <Stack spacing={0} sx={{ mt: 15 }}>
+      <Stack spacing={0} sx={{ mt: props.isSmallScreen ? 15 : 7 }}>
         <Typography variant="tag_title">{props.data.name}</Typography>
         <Typography variant="tag_count">by {props.data.username}</Typography>
       </Stack>

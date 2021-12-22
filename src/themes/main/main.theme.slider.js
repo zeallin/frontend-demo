@@ -52,7 +52,7 @@ const MainThemeSlider = {
             paddingLeft: '7px',
             marginLeft: '0px',
             // marginLeft: '-9.5px',
-            '@media (max-width: 600px)': MainThemeFont_Body2
+            // '@media (max-width: 600px)': MainThemeFont_Body1_Medium
 
         },
 
